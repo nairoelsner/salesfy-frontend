@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Col, Row } from 'antd';
 
-export const ResumeComponent = () => {
+const ResumeComponent = () => {
     return(
         <div className='resume-cards'>
             <Row gutter={16} style={{textAlign: 'center'}}>
@@ -17,15 +17,17 @@ export const ResumeComponent = () => {
                 </Col>
                 <Col span={6}>
                     <Card title="Melhor vendedor" bordered={true}>
-                        <h2>Joe Black</h2>
+                        <h2>João</h2>
                     </Card>
                 </Col>
                 <Col span={6}>
                     <Card title="Pior vendedor" bordered={true}>
-                        <h2>John Brown</h2>
+                        <h2>Maria</h2>
                     </Card>
                 </Col>
             </Row>
         </div>
     )
 }
+
+export default ResumeComponent

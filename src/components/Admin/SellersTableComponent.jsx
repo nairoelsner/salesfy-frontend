@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Progress } from 'antd';
-import { fecthSellersData } from '../data/sellersData';
+import { fecthSellersData } from '../../data/sellersData';
 
 const columns = [
   {
@@ -34,7 +34,7 @@ const columns = [
 ];
 const data = fecthSellersData()
 
-export const SellersTableComponent = () => {
+const SellersTableComponent = () => {
   return (
     <div className='sellers-table'>
       <Table
@@ -46,3 +46,5 @@ export const SellersTableComponent = () => {
     </div>
   );
 };
+
+export default SellersTableComponent

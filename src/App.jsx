@@ -1,11 +1,12 @@
-import { useState } from 'react'
 import './App.css'
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { HomeOutlined, ShoppingOutlined, UnorderedListOutlined, PlusCircleOutlined, SettingOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import { ResumeComponent } from './components/ResumeComponent';
-import { SellersTableComponent } from './components/SellersTableComponent';
-import { OrdersTableComponent } from './components/OrdersTableComponent';
+
+import AdminHome from './pages/admin/AdminHome';
+import AdminProducts from './pages/admin/AdminProducts';
+import AdminCreateProduct from './pages/admin/AdminCreateProduct';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -14,11 +15,11 @@ function getItem(label, key, icon, children) {
 }
 
 const menuItems = [
-  getItem('Home', '1', <HomeOutlined />),
+  getItem(<Link to={'/admin'}>Home</Link>, '1', <HomeOutlined />),
   getItem('Produtos', '2', <ShoppingOutlined />, 
     [
-      getItem('Produtos', '3', <UnorderedListOutlined />),
-      getItem('Adicionar', '4', <PlusCircleOutlined />)
+      getItem(<Link to={'/products'}>Produtos</Link>, '3', <UnorderedListOutlined />),
+      getItem(<Link to={'/createproduct'}>Adicionar</Link>, '4', <PlusCircleOutlined />)
     ]),
   getItem('Configurações', '5', <SettingOutlined />)
 ]
@@ -29,38 +30,33 @@ function App() {
   } = theme.useToken();
 
   return (
-    <Layout>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-        <div className="logo">
-          <h1>Salesfy</h1>
-        </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={menuItems}/>
-      </Sider>
+    <Router>
       <Layout>
-        <Content style={{margin: '24px 16px 0',}}>
-          <div style={{padding: 24, background: colorBgContainer}} id='content'>
-            <ResumeComponent/>
-            <div className='tables'>
-              <SellersTableComponent/>
-              <OrdersTableComponent/>
-            </div>
+        <Sider breakpoint="lg" collapsedWidth="0">
+          <div className="logo">
+            <h1>Salesfy</h1>
           </div>
-        </Content>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={menuItems}/>
+        </Sider>
         
-        <Footer style={{textAlign: 'center',}}>
-          Salesfy ©2023 Criado com ❤ por Clarisse, Gabriel, Nairo, Richard
-        </Footer>
+        <Layout>
+          <Content style={{margin: '24px 16px 0',}}>
+            <div style={{padding: 24, background: colorBgContainer}} id='content'>
+              <Routes>
+                <Route path="/admin" element={<AdminHome />}/>
+                <Route path='/products' element={<AdminProducts/>}/>
+                <Route path='/createproduct' element={<AdminCreateProduct/>}/>
+              </Routes>
+            </div>
+          </Content>
+          
+          <Footer style={{textAlign: 'center',}}>
+            Salesfy ©2023 Feito com ❤ por Clarisse, Gabriel, Nairo, Richard
+          </Footer>
+        </Layout>
+
       </Layout>
-    </Layout>
+    </Router>
   );
 }
 

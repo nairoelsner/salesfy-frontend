@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Progress } from 'antd';
-import { fetchOrdersData } from '../data/ordersData'
+import { fetchOrdersData } from '../../data/ordersData'
 
 const data = fetchOrdersData()
 
@@ -32,7 +32,7 @@ const columns = [
 
 
 
-export const OrdersTableComponent = () => {
+const OrdersTableComponent = () => {
   return (
     <div className='orders-table'>
       <Table
@@ -44,3 +44,5 @@ export const OrdersTableComponent = () => {
     </div>
   );
 };
+
+export default OrdersTableComponent
