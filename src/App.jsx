@@ -25,16 +25,14 @@ const menuItems = [
 ]
 
 function App() {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  const {token:{ colorBgContainer }} = theme.useToken();
 
   return (
     <Router>
       <Layout>
         <Sider breakpoint="lg" collapsedWidth="0">
           <div className="logo">
-            <h1>Salesfy</h1>
+            <h1>SALESFY</h1>
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={menuItems}/>
         </Sider>
@@ -43,15 +41,15 @@ function App() {
           <Content style={{margin: '24px 16px 0',}}>
             <div style={{padding: 24, background: colorBgContainer}} id='content'>
               <Routes>
-                <Route path="/admin" element={<AdminHome />}/>
-                <Route path='/products' element={<AdminProducts/>}/>
-                <Route path='/createproduct' element={<AdminCreateProduct/>}/>
+                <Route path="/admin" element={<AdminHome />} />
+                <Route path='/products' element={<AdminProducts />} />
+                <Route path='/createproduct' element={<AdminCreateProduct />} />
               </Routes>
             </div>
           </Content>
           
           <Footer style={{textAlign: 'center',}}>
-            Salesfy ©2023 Feito com ❤ por Clarisse, Gabriel, Nairo, Richard
+            Feito com ❤ por Clarisse, Gabriel, Nairo e Richard
           </Footer>
         </Layout>
 
