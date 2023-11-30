@@ -1,7 +1,7 @@
 import React from "react";
-import ResumeComponent from "../../components/admin/ResumeComponent";
-import SellersTableComponent from "../../components/admin/SellersTableComponent";
-import OrdersTableComponent from "../../components/admin/OrdersTableComponent";
+import ResumeComponent from "../../components/admin/ResumeComponent.jsx";
+import SellersTableComponent from "../../components/admin/SellersTableComponent.jsx";
+import OrdersTableComponent from "../../components/admin/OrdersTableComponent.jsx";
 
 const AdminHome = () => {
     return(
