@@ -1,6 +1,6 @@
 import React from "react";
 import OrdersTableComponent from "../../components/user/OrdersTableComponent";
-import ResumeComponent from "../../components/admin/ResumeComponent";
+import ResumeComponent from "../../components/user/ResumeComponent";
 
 const UserHome = () => {
     return(
