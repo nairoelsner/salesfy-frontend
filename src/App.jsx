@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Auth from './routers/auth';
-import Admin from './routers/admin';
-import User from './routers/user';
+import Auth from './core/auth';
+import Admin from './core/admin';
+import User from './core/user';
 
 const App = () => {
   return (
