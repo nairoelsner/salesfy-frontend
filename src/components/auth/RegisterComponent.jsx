@@ -1,5 +1,5 @@
 import React from 'react';
-import { LockOutlined, MailOutlined, UserOutlined, ApartmentOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Select } from 'antd';
 import { Link } from 'react-router-dom';
 
