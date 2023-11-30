@@ -4,9 +4,9 @@ import { Route, Routes, Link, Navigate } from 'react-router-dom';
 import { HomeOutlined, ShoppingOutlined, UnorderedListOutlined, PlusCircleOutlined, SettingOutlined, AppstoreOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 
-import AdminHome from '../pages/admin/AdminHome';
-import AdminProducts from '../pages/admin/AdminProducts';
-import AdminCreateProduct from '../pages/admin/AdminCreateProduct';
+import AdminHome from '../pages/adminPages/AdminHome';
+import AdminProducts from '../pages/adminPages/AdminProducts';
+import AdminCreateProduct from '../pages/adminPages/AdminCreateProduct';
 
 const { Content, Footer, Sider } = Layout;
 
