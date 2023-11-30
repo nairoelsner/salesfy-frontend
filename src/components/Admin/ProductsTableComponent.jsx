@@ -34,7 +34,7 @@ const columns = [
     dataIndex: 'id',
     render: (id) => (
       <span style={{textAlign: 'center'}}>
-        <Link to={`/editproduct/${id}`}>Editar</Link> | <Link to={`/deleteproduct/${id}`} style={{color: 'red'}}>Excluir</Link>
+        <Link to={`/admin/edit-product/${id}`}>Editar</Link> | <Link to={`/admin/delete-product/${id}`} style={{color: 'red'}}>Excluir</Link>
       </span>
     ),
   }
@@ -47,7 +47,7 @@ const ProductTableComponent = () => {
       <Table
         columns={columns}
         dataSource={data}
-        pagination={{position: ['bottomRight'], pageSize: 12}}
+        pagination={{position: ['bottomCenter'], pageSize: 12}}
         bordered
         />
     </div>

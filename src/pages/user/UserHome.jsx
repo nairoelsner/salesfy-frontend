@@ -1,18 +1,16 @@
 import React from "react";
-import SellersTableComponent from "../../components/admin/SellersTableComponent";
-import OrdersTableComponent from "../../components/admin/OrdersTableComponent";
+import OrdersTableComponent from "../../components/user/OrdersTableComponent";
 import ResumeComponent from "../../components/admin/ResumeComponent";
 
-const AdminHome = () => {
+const UserHome = () => {
     return(
         <>
             <ResumeComponent/>
             <div className='tables'>
-              <SellersTableComponent/>
               <OrdersTableComponent/>
             </div>
         </>
     )
 }
 
-export default AdminHome
+export default UserHome

@@ -32,37 +32,41 @@ const columns = [
     render: (text) => <p style={{color:'green'}}><b>R${text},00</b></p>
   },
   {
+    title: 'Comissão',
+    dataIndex: 'commission',
+    key: 'commission',
+    render: (text) => <p style={{color:'green'}}><b>R${text}</b></p>
+  },
+  {
     title: 'Progresso',
     key: 'progress',
     dataIndex: 'progress',
     render: (progress) => (
       <span>
-        <Progress strokeColor={calculateProgressColor(progress)} percent={progress} size={'small'} showInfo={false}/>
+        <Progress strokeColor={calculateProgressColor(progress)} percent={progress} size={'small'}/>
       </span>
     ),
   }
 ];
 
 const SellersTableComponent = () => {
-  
   const [data, setData] = useState()
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchData = () => {
-      const response = fecthSellersData()
-      if(response){
-        setData(response)
-        setLoading(false)
-      }
+  const fetchData = () => {
+    const response = fecthSellersData()
+    if(response){
+      setData(response)
+      setLoading(false)
     }
-    
+  }
+
+  useEffect(() => { 
     fetchData()
     const intervalId = setInterval(fetchData, 5000);
     return () => {
       clearInterval(intervalId);
     }
-
   }, []);
 
 
@@ -71,11 +75,11 @@ const SellersTableComponent = () => {
       <Table
         columns={columns}
         dataSource={data}
-        pagination={{position: ['bottomRight'], pageSize: 8}}
+        pagination={{position: ['bottomCenter'], pageSize: 8}}
         bordered
         loading={loading}
         locale={{ emptyText: <Empty description="Carregando..." /> }}
-        />
+      />
     </div>
   );
 };

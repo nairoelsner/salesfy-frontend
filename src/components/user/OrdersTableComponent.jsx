@@ -1,36 +1,30 @@
 import React, { useState } from 'react';
-import { Table, Progress } from 'antd';
+import { Table } from 'antd';
 import { fetchOrdersData } from '../../data/ordersData'
 
 const data = fetchOrdersData()
-
 const columns = [
   {
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
+    align: 'center',
     render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Vendedor',
-    dataIndex: 'seller',
-    key: 'seller',
-    render: (text) => <a>{text}</a>
   },
   {
     title: 'Valor',
     dataIndex: 'value',
     key: 'value',
+    align: 'center',
     render: (text) => <p style={{color:'green'}}><b>R${text},00</b></p>
   },
   {
     title: 'Data',
     dataIndex: 'date',
-    key: 'date'
+    key: 'date',
+    align: 'center',
   }
 ];
-
-
 
 const OrdersTableComponent = () => {
   return (

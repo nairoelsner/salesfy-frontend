@@ -1,0 +1,33 @@
+h1{
+  margin: 10px;
+}
+
+p{
+  text-align: center;
+}
+
+.login-form {
+  width: 400px;
+  height: 400px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.auth-form {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Isso garante que a div ocupe 100% da altura da viewport */
+}
