@@ -1,11 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
+  const navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    axios.post(`${import.meta.env.VITE_API_URL}/login`, values)
+    .then(function (response) {
+      if(response.status === 200){
+        const user = response.data;
+        localStorage.setItem('userId', user.id)
+        localStorage.setItem('isAdmin', user.isAdmin)
+        user.isAdmin ? navigate('/admin/home') : navigate('/user/home')
+      }
+    })
+    .catch(function (error) {
+      if(error.status === 401){
+        console.log(error);
+      }
+    });
   };
   
   return (

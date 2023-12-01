@@ -27,7 +27,7 @@ const menuItems = [
       getItem(<Link to={'/admin/products'}>Kits</Link>, '6', <UnorderedListOutlined />),
       getItem(<Link to={'/admin/create-product'}>Adicionar</Link>, '7', <AppstoreAddOutlined />)
     ]),
-  getItem('Configurações', '5', <SettingOutlined />)
+  getItem('Configurações', '8', <SettingOutlined />)
 ]
 
 function Admin(){

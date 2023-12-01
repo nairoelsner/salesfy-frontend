@@ -1,16 +1,29 @@
 import React from 'react';
+import axios from 'axios';
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Select } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const options = [
-    <Select.Option value="male" key="male">Nairo Elsner</Select.Option>,
-    <Select.Option value="female" key="female">Clarisse Estima</Select.Option>,
+    <Select.Option value="1" key="1">Nairo Elsner</Select.Option>,
+    <Select.Option value="2" key="2">Clarisse Estima</Select.Option>,
 ]
 
 const RegisterComponent = () => {
+    const navigate = useNavigate();
+
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+        axios.post(`${import.meta.env.VITE_API_URL}/register`, values)
+        .then(function(response){
+            if(response.status === 200){
+                navigate('/auth/login')
+            }
+        })
+        .catch(function (error) {
+            if(error.status === 401){
+                console.log(error);
+            }
+        });
     };
   
     return (
@@ -27,7 +40,7 @@ const RegisterComponent = () => {
                 <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Nome"/>
             </Form.Item>
 
-            <Form.Item name="gerente" rules={[{required: true, message: 'Selecione seu gerente!'}]}>
+            <Form.Item name="managerId" rules={[{required: true, message: 'Selecione seu gerente!'}]}>
                 <Select placeholder="Selecione seu gerente" allowClear>
                     {options}
                 </Select>
