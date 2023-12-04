@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Table, Progress, Empty } from 'antd';
-import { fecthSellersData } from '../../data/sellersData';
 
 const calculateProgressColor = (progress) => {
   if(progress <= 33){
-    return '#ffccc7'
+    return '#ffccc7';
   } else if(progress > 33 && progress <= 70){
-    return {'0%': '#ffccc7', '100%': '#ffe58f'}
+    return {'0%': '#ffccc7', '100%': '#ffe58f'};
   } else{
-    return {'0%': '#ffccc7', '70%': '#ffe58f', '100%': '#87d068'}
+    return {'0%': '#ffccc7', '70%': '#ffe58f', '100%': '#87d068'};
   }
 }
 
@@ -17,19 +17,19 @@ const columns = [
     title: 'Nome',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
+    render: (text) => <p><b>{text}</b></p>,
   },
   {
     title: 'Vendas',
-    dataIndex: 'sales',
-    key: 'sales',
-    render: (text) => <p style={{color:'green'}}><b>R${text},00</b></p>
+    dataIndex: 'salesValue',
+    key: 'salesValue',
+    render: (text) => <p style={{color:'green'}}><b>R${text}</b></p>
   },
   {
     title: 'Meta',
     dataIndex: 'goal',
     key: 'goal',
-    render: (text) => <p style={{color:'green'}}><b>R${text},00</b></p>
+    render: (text) => <p style={{color:'green'}}><b>R${text}</b></p>
   },
   {
     title: 'Comissão',
@@ -39,8 +39,8 @@ const columns = [
   },
   {
     title: 'Progresso',
-    key: 'progress',
-    dataIndex: 'progress',
+    dataIndex: 'progressPercent',
+    key: 'progressPercent',
     render: (progress) => (
       <span>
         <Progress strokeColor={calculateProgressColor(progress)} percent={progress} size={'small'}/>
@@ -50,34 +50,40 @@ const columns = [
 ];
 
 const SellersTableComponent = () => {
-  const [data, setData] = useState()
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
 
   const fetchData = () => {
-    const response = fecthSellersData()
-    if(response){
-      setData(response)
-      setLoading(false)
-    }
+    const managerId = localStorage.getItem('userId');
+    axios.get(`${import.meta.env.VITE_API_URL}/admin/sellers-table/${managerId}`)
+    .then(function (response) {
+        if(response.status === 200){
+            console.log(response.data);
+            setLoading(false);
+            setData(response.data);
+        }
+    })
+    .catch(function (error) {
+        if(error.status === 401){
+            console.log(error);
+        }
+    });
   }
 
-  useEffect(() => { 
-    fetchData()
-    const intervalId = setInterval(fetchData, 5000);
-    return () => {
-      clearInterval(intervalId);
-    }
+  useEffect(() => {
+    fetchData();
   }, []);
 
 
   return (
     <div className='sellers-table'>
       <Table
+        loading={loading}
         columns={columns}
         dataSource={data}
         pagination={{position: ['bottomCenter'], pageSize: 8}}
         bordered
-        loading={loading}
+        align='center'
         locale={{ emptyText: <Empty description="Carregando..." /> }}
       />
     </div>
