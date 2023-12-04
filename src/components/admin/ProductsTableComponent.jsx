@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Table } from 'antd';
-import { fetchProductsData } from '../../data/productsData';
 import { Link } from 'react-router-dom';
 
 const columns = [
@@ -39,9 +38,9 @@ const columns = [
     ),
   }
 ];
-const data = fetchProductsData()
 
 const ProductTableComponent = () => {
+  const data = []
   return (
     <div className='sellers-table'>
       <Table
