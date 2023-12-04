@@ -6,7 +6,6 @@ const adminRouter = require('./src/routers/adminRouter');
 
 //Configs
 PORT = 8080;
-IP = "localhost";
 
 const app = express();
 
@@ -25,6 +24,6 @@ app.get('/', async (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(PORT, IP, () => {
-    console.log(`Servidor rodando em http://${IP}:${PORT}/`);
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
