@@ -8,7 +8,7 @@ const LoginComponent = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    axios.post(`${import.meta.env.VITE_API_URL}/login`, values)
+    axios.post(`${process.env.API_URL}/login`, values)
     .then(function (response) {
       if(response.status === 200){
         const user = response.data;
