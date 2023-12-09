@@ -9,7 +9,7 @@ body{
 }
 
 #content{
-  min-height: 90vh;
+  min-height: 90.3vh;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;

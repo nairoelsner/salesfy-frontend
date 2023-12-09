@@ -1,10 +1,11 @@
 import '../assets/styles/User.css'
 import React from 'react';
 import { Route, Routes, Link, Navigate } from 'react-router-dom';
-import { HomeOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { HomeOutlined, ShoppingOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 
 import UserHome from '../pages/user/UserHome';
+import CreateOrder from '../pages/user/CreateOrder';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -15,6 +16,7 @@ function getItem(label, key, icon, children) {
 const menuItems = [
   getItem(<Link to={'/user/home'}>Home</Link>, '1', <HomeOutlined />),
   getItem(<Link to={'/user/create-order'}>Novo pedido</Link>, '2', <ShoppingOutlined />),
+  getItem(<Link to={'/login'}>Sair</Link>, '3', <LogoutOutlined />)
 ]
 
 function User(){
@@ -35,7 +37,7 @@ function User(){
               <Routes>
                 <Route path="/*" element={<Navigate to='/user/home' />} />
                 <Route path="/home" element={<UserHome />} />
-                <Route path="/create-order" element={<UserHome />} />
+                <Route path="/create-order" element={<CreateOrder />} />
               </Routes>
             </div>
           </Content>

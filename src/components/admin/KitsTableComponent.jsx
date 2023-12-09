@@ -17,22 +17,10 @@ const columns = [
     render: (text) => <p style={{textAlign: 'center'}}>{text}</p>
   },
   {
-    title: 'Descrição',
-    dataIndex: 'description',
-    key: 'description',
-    render: (text) => <p>{text}</p>
-  },
-  {
     title: 'Preço',
     dataIndex: 'price',
     key: 'price',
     render: (text) => <p style={{color:'green', textAlign: 'center'}}><b>R${text}</b></p>
-  },
-  {
-    title: 'Estoque',
-    dataIndex: 'stock',
-    key: 'stock',
-    render: (text) => <p style={{textAlign: 'center'}}><b>{text}</b></p>
   },
   {
     title: 'Ações',
@@ -40,18 +28,18 @@ const columns = [
     dataIndex: 'id',
     render: (id) => (
       <span style={{textAlign: 'center'}}>
-        <Link to={`/admin/edit-product/${id}`}>Editar</Link> | <Link to={`/admin/delete-product/${id}`} style={{color: 'red'}}>Excluir</Link>
+        <Link to={`/admin/edit-kit/${id}`}>Editar</Link> | <Link to={`/admin/delete-kit/${id}`} style={{color: 'red'}}>Excluir</Link>
       </span>
     ),
   }
 ];
 
-const ProductTableComponent = () => {
+const KitsTableComponent = () => {
   const [data, setData] = useState()
   const [loading, setLoading] = useState(true)
 
   const fetchData = () => {
-    axios.get(`${import.meta.env.VITE_API_URL}/admin/products`)
+    axios.get(`${import.meta.env.VITE_API_URL}/admin/kits`)
     .then(function (response) {
         if(response.status === 200){
             setLoading(false)
@@ -84,4 +72,4 @@ const ProductTableComponent = () => {
   );
 };
 
-export default ProductTableComponent
+export default KitsTableComponent

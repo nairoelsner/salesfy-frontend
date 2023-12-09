@@ -39,11 +39,10 @@ const OrdersTableComponent = () => {
     const managerId = localStorage.getItem('userId')
     axios.get(`${import.meta.env.VITE_API_URL}/admin/purchases-table/${managerId}`)
     .then(function (response) {
-        if(response.status === 200){
-            console.log(response.data);
-            setLoading(false)
-            setData(response.data);
-        }
+      if(response.status === 200){
+          setLoading(false)
+          setData(response.data);
+      }
     })
     .catch(function (error) {
         if(error.status === 401){

@@ -1,12 +1,13 @@
 import '../assets/styles/Admin.css'
 import React from 'react';
 import { Route, Routes, Link, Navigate } from 'react-router-dom';
-import { HomeOutlined, ShoppingOutlined, UnorderedListOutlined, PlusCircleOutlined, SettingOutlined, AppstoreOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { HomeOutlined, ShoppingOutlined, UnorderedListOutlined, PlusCircleOutlined, AppstoreOutlined, AppstoreAddOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 
 import AdminHome from '../pages/admin/AdminHome';
 import AdminProducts from '../pages/admin/AdminProducts';
 import AdminCreateProduct from '../pages/admin/AdminCreateProduct';
+import AdminKits from '../pages/admin/AdminKits';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -24,10 +25,10 @@ const menuItems = [
   
   getItem('Kits', '5', <AppstoreOutlined />, 
     [
-      getItem(<Link to={'/admin/products'}>Kits</Link>, '6', <UnorderedListOutlined />),
+      getItem(<Link to={'/admin/kits'}>Kits</Link>, '6', <UnorderedListOutlined />),
       getItem(<Link to={'/admin/create-product'}>Adicionar</Link>, '7', <AppstoreAddOutlined />)
     ]),
-  getItem('Configurações', '8', <SettingOutlined />)
+  getItem(<Link to={'/login'}>Sair</Link>, '8', <LogoutOutlined />)
 ]
 
 function Admin(){
@@ -47,11 +48,17 @@ function Admin(){
             <div style={{padding: 24, background: colorBgContainer}} id='content'>
               <Routes>
                 <Route path="/*" element={<Navigate to='/admin/home' />} />
+                
                 <Route path="/home" element={<AdminHome />} />
+                
                 <Route path='/products' element={<AdminProducts />} />
                 <Route path='/create-product' element={<AdminCreateProduct />} />
                 <Route path='/edit-product/:id' element={<AdminCreateProduct />} />
                 <Route path='/delete-product/:id' element={<AdminCreateProduct />} />
+
+                <Route path='/kits' element={<AdminKits />} />
+
+
               </Routes>
             </div>
           </Content>

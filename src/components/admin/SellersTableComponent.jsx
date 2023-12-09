@@ -58,7 +58,6 @@ const SellersTableComponent = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/admin/sellers-table/${managerId}`)
     .then(function (response) {
         if(response.status === 200){
-            console.log(response.data);
             setLoading(false);
             setData(response.data);
         }
