@@ -17,6 +17,12 @@ const columns = [
     render: (text) => <p style={{textAlign: 'center'}}>{text}</p>
   },
   {
+    title: 'Descrição',
+    dataIndex: 'description',
+    key: 'description',
+    render: (text) => <p style={{textAlign: 'center'}}>{text}</p>
+  },
+  {
     title: 'Preço',
     dataIndex: 'price',
     key: 'price',

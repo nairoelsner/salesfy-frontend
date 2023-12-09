@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, TreeSelect } from 'antd';
+import { Button, TreeSelect, message } from 'antd';
 const { SHOW_PARENT } = TreeSelect;
 
 function getItem(label, value, key, children) {
   return {label, value, key, children};
 }
 
-const SelectProductsComponent = () => {
+function formatPostData(data) {
+  const result = {products: [], kits: []};
+  
+  data.forEach(item => {
+    const [type, id] = item.split('-');
+    result[type].push(parseInt(id));
+  });
+
+  return result;
+}
+
+const CreateOrderComponent = () => {
   const [value, setValue] = useState([]);
   const [treeData, setTreeData] = useState([getItem('Produtos', 'produtos', 'produtos', []), getItem('Kits', 'kits', 'kits', [])]);
 
@@ -18,12 +29,12 @@ const SelectProductsComponent = () => {
           const formattedData = [
             {
               label: 'Produtos',
-              value: 'produtos',
-              key: 'produtos',
+              value: 'products',
+              key: 'products',
               children: response.data.availableProducts.map((product) => ({
                 label: product.name,
-                value: `produto-${product.id}`,
-                key: `produto-${product.id}`,
+                value: `products-${product.id}`,
+                key: `products-${product.id}`,
               })),
             },
             {
@@ -32,8 +43,8 @@ const SelectProductsComponent = () => {
               key: 'kits',
               children: response.data.availableKits.map((kit) => ({
                 label: kit.name,
-                value: `kit-${kit.id}`,
-                key: `kit-${kit.id}`,
+                value: `kits-${kit.id}`,
+                key: `kits-${kit.id}`,
               })),
             },
           ];
@@ -55,6 +66,20 @@ const SelectProductsComponent = () => {
     console.log('onChange ', newValue);
     setValue(newValue);
   };
+
+  const sendData = () => {
+    if(value.length > 0){
+      const userId = localStorage.getItem('userId')
+      const products = formatPostData(value)
+      axios.post(`${import.meta.env.VITE_API_URL}/user/create-order`, {userId, products: products.products, kits: products.kits})
+      .then(function (response){
+        if(response.status == 200){
+          console.log('Pedido adicionado')
+        }
+      })
+    }
+  }
+
   const tProps = {
     treeData,
     value,
@@ -69,10 +94,10 @@ const SelectProductsComponent = () => {
   return (
     <>
       <TreeSelect {...tProps} />
-      <Button type="primary" style={{width: '200px'}}>Comprar</Button>
+      <Button type="primary" style={{width: '200px'}} onClick={sendData}>Comprar</Button>
     </>
 
   )
   
 };
-export default SelectProductsComponent;
+export default CreateOrderComponent;

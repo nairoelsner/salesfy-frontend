@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Table } from 'antd';
-import { fetchOrdersData } from '../../data/ordersData'
 
-const data = fetchOrdersData()
 const columns = [
   {
     title: 'ID',
-    dataIndex: 'id',
+    dataIndex: 'key',
     key: 'id',
     align: 'center',
     render: (text) => <a>{text}</a>,
   },
   {
     title: 'Valor',
-    dataIndex: 'value',
-    key: 'value',
+    dataIndex: 'price',
+    key: 'price',
     align: 'center',
-    render: (text) => <p style={{color:'green'}}><b>R${text},00</b></p>
+    render: (text) => <p style={{color:'green'}}><b>R${text}</b></p>
   },
   {
     title: 'Data',
@@ -27,12 +26,38 @@ const columns = [
 ];
 
 const OrdersTableComponent = () => {
+  const [data, setData] = useState()
+  const [loading, setLoading] = useState(true)
+
+  const fetchData = () => {
+    const userId = localStorage.getItem('userId')
+    axios.get(`${import.meta.env.VITE_API_URL}/user/orders/${userId}`)
+    .then(function (response) {
+      if(response.status === 200){
+          setLoading(false)
+          setData(response.data);
+      }
+    })
+    .catch(function (error) {
+        if(error.status === 401){
+            console.log(error);
+        }
+    });
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+
   return (
     <div className='orders-table'>
       <Table
+        loading={loading}
         columns={columns}
         dataSource={data}
         bordered={true}
+        align='center'
         pagination={{position: ['bottomCenter'], pageSize: 9}}
         />
     </div>

@@ -1,11 +1,11 @@
 import React from "react";
-import SelectProductsComponent from "../../components/user/SelectProductsComponent";
+import CreateOrderComponent from "../../components/user/CreateOrderComponent";
 
 
 const CreateOrder = () => {
     return(
         <>
-            <SelectProductsComponent />
+            <CreateOrderComponent />
         </>
     )
 }
